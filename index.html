@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDMN Агент - Мобильное решение для торговых представителей</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0 50 Q 25 25, 50 50 T 100 50" stroke="rgba(255,255,255,0.1)" fill="none" stroke-width="2"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #667eea;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid #667eea;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .clients-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 60px 20px;
+            margin: 60px 0;
+        }
+
+        .clients-list {
+            list-style: none;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
+        .clients-list li {
+            background: white;
+            padding: 20px 30px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        .clients-list li:hover {
+            transform: translateX(10px);
+        }
+
+        .clients-list li::before {
+            content: '✓';
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.3em;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .screenshot-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-card:hover {
+            transform: scale(1.05);
+        }
+
+        .screenshot-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 400px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screenshot-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 5px;
+        }
+
+        .screenshot-title {
+            text-align: center;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .contact-info {
+            max-width: 800px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: background 0.3s ease;
+        }
+
+        .contact-card:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .contact-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .contact-card a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            border-bottom-color: white;
+        }
+
+        .integration-badge {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .offline-badge {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header p {
+                font-size: 1.1em;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .features-grid,
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>📱 GDMN Агент</h1>
+            <p>Комплексная мобильная система для торговых представителей</p>
+            <p style="font-size: 1.1em; opacity: 0.9;">Оптимизируйте работу вашего отдела продаж с современным цифровым решением</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title">О системе</h2>
+            <p style="text-align: center; font-size: 1.2em; color: #666; max-width: 900px; margin: 0 auto;">
+                GDMN Агент — это комплексная система, предназначенная для помощи торговым агентам в их повседневной работе с клиентами и управлении продажами. Приложение значительно облегчает и оптимизирует рабочие процессы, сокращает время на выполнение рутинных задач, улучшает взаимодействие с клиентами и способствует увеличению продаж.
+            </p>
+            <div style="text-align: center; margin-top: 30px;">
+                <span class="offline-badge">⚡ Работает в оффлайн-режиме</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Основные функции</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Оформление заявок</h3>
+                    <p>Создание и отправка заявок на поставку товаров. Упрощенный процесс заказа и обработки продукции для ваших клиентов.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>Управление маршрутом</h3>
+                    <p>Получайте оптимальные маршруты и просматривайте их на карте. Сокращайте время на передвижение и улучшайте планирование визитов.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Управление ассортиментом</h3>
+                    <p>Работа с матрицами товаров, актуальные цены, скидки и доступность товаров для каждой организации в режиме реального времени.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Контроль задолженностей</h3>
+                    <p>Оперативный контроль задолженности клиентов и принятие мер по её урегулированию непосредственно в приложении.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Аналитика и отчетность</h3>
+                    <p>Построение отчетов по документам в разрезе различных показателей. Анализ деятельности и принятие обоснованных решений на основе данных.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Справочники и документы</h3>
+                    <p>Быстрый доступ к каталогам товаров, реквизитам покупателей и другой необходимой информации для работы с клиентами.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <h3 style="color: #667eea; margin-bottom: 20px;">Интеграция с системами предприятия</h3>
+                <span class="integration-badge">Гедымин</span>
+                <span class="integration-badge">SAP</span>
+                <span class="integration-badge">1C</span>
+                <p style="margin-top: 20px; color: #666;">Обеспечивает обмен актуальными данными и синхронизацию с основной системой предприятия</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="clients-section">
+        <div class="container">
+            <h2 class="section-title" style="color: #2d3748;">Внедрено на предприятиях</h2>
+            <ul class="clients-list">
+                <li>ОАО «Витебская бройлерная птицефабрика»</li>
+                <li>ОАО «Слуцкий мясокомбинат»</li>
+                <li>ОАО «Витебский мясокомбинат»</li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="contact-section">
+        <h2 style="font-size: 2.5em; margin-bottom: 20px;">Контакты</h2>
+        <p style="font-size: 1.2em; margin-bottom: 40px;">Свяжитесь с нами для получения консультации или демонстрации системы</p>
+        
+        <div class="contact-info">
+            <div class="contact-card">
+                <div class="contact-icon">🌐</div>
+                <h3>Веб-сайт</h3>
+                <a href="http://www.gsbelarus.com" target="_blank">www.gsbelarus.com</a>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">📞</div>
+                <h3>Телефон</h3>
+                <a href="tel:+375173791759">+375 17 379-17-59</a>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">💼</div>
+                <h3>Email</h3>
+                <p>support@gsbelarus.com</p>
+            </div>
+
+
+ 
+        </div>
+
+        <p style="margin-top: 40px; font-size: 1.1em; opacity: 0.9;">
+            Наша команда будет рада помочь вам и ответить на все ваши вопросы
+        </p>
+    </div>
+
+    <footer>
+        <p>&copy; Golden Software.</p>
+        <p>&copy; 2025 Все права защищены.</p>
+        <p style="margin-top: 10px; opacity: 0.8;">Комплексные решения для автоматизации торговли</p>
+    </footer>
+</body>
+</html>
